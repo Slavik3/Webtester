@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+    xmlns:beans="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+        http://www.springframework.org/schema/security
+        http://www.springframework.org/schema/security/spring-security.xsd">
+
+    <http auto-config="true">
+    
+        <form-login login-page='/login' 
+			login-processing-url="/j_spring_security_check"
+			authentication-failure-url="/login?login_error=true" 
+			username-parameter="j_username"
+			password-parameter="j_password"
+			/>
+        <logout logout-url="/logout" logout-success-url="/login" invalidate-session="true" />
+    </http>
+    
+    <beans:bean id="dataSource"
+        class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <beans:property name="driverClassName" value="com.mysql.jdbc.Driver" />
+        <beans:property name="url" value="jdbc:mysql://localhost/test_source_it" /> <!-- db4free.net/webtester -->
+        <beans:property name="username" value="root" /> <!-- webtester -->
+        <beans:property name="password" value="" /> <!-- 123456 -->
+    </beans:bean>
+    
+    <beans:bean id="bcrypt" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
+    <authentication-manager alias="authenticationManager">
+        <authentication-provider>
+            <password-encoder ref="bcrypt"/>
+            <jdbc-user-service id="jdbcUserService" data-source-ref="dataSource"
+                users-by-username-query="
+                select login, password, isActive as enabled 
+                from account where login=?" 
+                authorities-by-username-query="
+                select u.login, r.name from account u, role r, account_role ur 
+                where u.id=ur.id_account and r.id=ur.id_role and u.login=?" 
+            />
+        </authentication-provider>
+    </authentication-manager>
+</beans:beans>

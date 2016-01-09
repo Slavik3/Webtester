@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+	<session-factory>
+		<property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+		<property name="show_sql">true</property>
+		<property name="hbm2ddl.auto">update</property>
+		
+		<mapping class="ua.kharkov.sourceit.Webtester.entity.Account"/>
+		<mapping class="ua.kharkov.sourceit.Webtester.entity.Role"/>
+		<mapping class="ua.kharkov.sourceit.Webtester.entity.AccauntRole"/>
+		<mapping class="ua.kharkov.sourceit.Webtester.entity.AccauntRegistration"/>
+		<mapping class="ua.kharkov.sourceit.Webtester.entity.Test"/>
+		<mapping class="ua.kharkov.sourceit.Webtester.entity.Qwastion"/>
+		<mapping class="ua.kharkov.sourceit.Webtester.entity.Answer"/>
+		<mapping class="ua.kharkov.sourceit.Webtester.entity.TestRezult"/>
+		
+	</session-factory>
+</hibernate-configuration>
