@@ -57,7 +57,7 @@ public class SendMessage {
 			message.setRecipients(Message.RecipientType.TO,
 				InternetAddress.parse(emailTo));
 			message.setSubject(subject);
-			String link = "\n http://Webtester/confirm/"+uuid;
+			String link = "\n http://webtester/confirm/"+uuid;
 			message.setText("Dear "+nameRec+", "
 				+ "\nUour password is "+ passwordBCryptRec + "For the confirmation of this account, please, follow this link" + link);
 //String content="<html><body><a href='www.abc.com\\activation?hash="+i+"\">click here</a> </body></html>"

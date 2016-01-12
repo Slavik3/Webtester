@@ -17,7 +17,7 @@
 <body>
 <%@ include file="../../jspf/top.jspf" %>
 	111
-	<form method="GET" action="/Webtester/nextTestQwastion" class="form-signin">
+	<form method="GET" action="/webtester/nextTestQwastion" class="form-signin">
 		
 			${qwastion}
 			<br>

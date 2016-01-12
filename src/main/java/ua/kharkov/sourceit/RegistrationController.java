@@ -81,6 +81,7 @@ public class RegistrationController {
 	
 	@RequestMapping(value = "/confirm/{uuid}")
 	public ModelAndView  confirm(@PathVariable("uuid") int uuid) {
+		System.out.println("uuid "+uuid);
 		Session session = sessionFactory.openSession(); 
 		AccauntRegistration accauntRegistration = (AccauntRegistration) session.createQuery("from AccauntRegistration as accaunt_registration where hash = " + uuid).uniqueResult();
 		int idAccount = accauntRegistration.getIdAccount();

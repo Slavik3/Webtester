@@ -16,7 +16,7 @@
 </head>
 <body>
 <%@ include file="../../jspf/top.jspf" %>
-<form method="GET" action="/Webtester/editUser" class="form-signin">
+<form method="GET" action="/webtester/editUser" class="form-signin">
 	<input value="${user.id}" name="idAccaunt" type="hidden"/>
 	<label>login:</label>
 	<input value="${user.login}" name="login" class="form-control form-control-inline" size="10"/>

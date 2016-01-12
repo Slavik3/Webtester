@@ -44,7 +44,7 @@
 	        		</c:forEach>
 	        	</select>
 	
-	<a href="/Webtester/passwordRecoveryPage">Забыли пароль?</a>
+	<a href="/webtester/passwordRecoveryPage">Забыли пароль?</a>
 	<br><br>
 	
 	<br>
