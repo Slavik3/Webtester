@@ -20,7 +20,7 @@ public class SendMessage {
 	
 	static Logger log = Logger.getLogger(SendMessage.class.getName());
 	
-	public static String send(Account accaunt, UUID uuid){
+	public static String send(Account accaunt, UUID uuid, String subject){
 
 		log.debug("start send");
 		ModelAndView modelAndView = new ModelAndView();	
@@ -56,7 +56,7 @@ public class SendMessage {
 			message.setFrom(new InternetAddress("slavikkozlov3@gmail.com"));
 			message.setRecipients(Message.RecipientType.TO,
 				InternetAddress.parse(emailTo));
-			message.setSubject("Password recovery");
+			message.setSubject(subject);
 			String link = "\n http://Webtester/confirm/"+uuid;
 			message.setText("Dear "+nameRec+", "
 				+ "\nUour password is "+ passwordBCryptRec + "For the confirmation of this account, please, follow this link" + link);

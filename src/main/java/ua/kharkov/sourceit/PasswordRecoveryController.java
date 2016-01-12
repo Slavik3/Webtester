@@ -49,14 +49,14 @@ public class PasswordRecoveryController {
 		
 		Session session = sessionFactory.openSession(); 
 		Account accauntRecovery = null;
-		accauntRecovery = (Account) session.createQuery("from Accaunt as accaunt where login= '"+login+"'").uniqueResult();
+		accauntRecovery = (Account) session.createQuery("from Account as account where login= '"+login+"'").uniqueResult();
 		log.debug("accauntDB "+accauntRecovery);
 		String emailTo = accauntRecovery.getEmail();
 		String passwordBCryptRec = accauntRecovery.getPassword();
 		String nameRec = accauntRecovery.getLogin();
 		System.out.println("emailTo "+emailTo);
 		final String username = "slavikkozlov3@gmail.com";
-		final String password = "";
+		final String password = "682440qwerty";
 
 		Properties props = new Properties();
 		props.put("mail.smtp.auth", "true");

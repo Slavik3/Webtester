@@ -38,6 +38,9 @@ public class LoginController {
 	@Autowired  
 	SessionFactory sessionFactory;
 	
+	@Autowired
+	private HttpServletRequest context;
+	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
     public String indexPage(ModelMap model) {
 		log.debug("index");
@@ -92,6 +95,8 @@ public class LoginController {
 		ModelAndView modelAndView = new ModelAndView();		
 		modelAndView.addObject("listAccaunt", listAccount);
 		modelAndView.setViewName("admin/adminPage");
+		
+		
         return modelAndView;
     }
     
@@ -121,6 +126,8 @@ public class LoginController {
 		
 		modelAndView.addObject("listTest", listTest);
 		
+		System.out.println("context "+context.getRequestURI());
+		model.addAttribute("url", context.getRequestURI());
 		
 		modelAndView.setViewName("student/studentPage");
         return modelAndView;

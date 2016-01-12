@@ -20,7 +20,6 @@
 <%@ include file="../../jspf/top.jspf" %>
 <p>Hello ${user.login}</p>
 
-<!-- ${listAccaunt} -->
 
 <table>
     <tr>

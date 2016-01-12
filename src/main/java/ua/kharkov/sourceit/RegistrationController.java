@@ -71,7 +71,7 @@ public class RegistrationController {
 		System.out.println("accauntRegistration==> "+accauntRegistration);
 		session.save(accauntRegistration);
 		session.getTransaction().commit();
-		SendMessage.send(accaunt, uuid);
+		SendMessage.send(accaunt, uuid, "Registration");
 		modelAndView.addObject("userAdded","Пользователь добавлен");
 		modelAndView.setViewName("login");
 		session.close();

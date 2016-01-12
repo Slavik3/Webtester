@@ -1,20 +1,14 @@
 package ua.kharkov.sourceit.Webtester.entity;
 
 import java.io.Serializable;
-import java.util.Date;
-import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
 
 
 
-@XmlRootElement(name = "account")
 @Entity
 @Table(name="account")
 public class Account implements Serializable {
@@ -32,7 +26,6 @@ public class Account implements Serializable {
 	
 	private int isActive;
 
-	@XmlElement
 	public int getId() {
 		return id;
 	}
@@ -40,7 +33,7 @@ public class Account implements Serializable {
 	public void setId(int id) {
 		this.id = id;
 	}
-	@XmlElement
+	
 	public String getLogin() {
 		return login;
 	}
@@ -48,7 +41,7 @@ public class Account implements Serializable {
 	public void setLogin(String login) {
 		this.login = login;
 	}
-	@XmlElement
+	
 	public String getPassword() {
 		return password;
 	}
@@ -56,7 +49,7 @@ public class Account implements Serializable {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	@XmlElement
+	
 	public String getEmail() {
 		return email;
 	}
@@ -64,7 +57,7 @@ public class Account implements Serializable {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	@XmlElement
+	
 	public String getFio() {
 		return fio;
 	}
@@ -72,7 +65,7 @@ public class Account implements Serializable {
 	public void setFio(String fio) {
 		this.fio = fio;
 	}
-	@XmlElement
+	
 	public int getIsActive() {
 		return isActive;
 	}
