@@ -2,6 +2,8 @@ package ua.kharkov.sourceit;
 
 import java.util.UUID;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.log4j.Logger;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -25,6 +27,9 @@ public class RegistrationController {
 	
 	static Logger log = Logger.getLogger(RegistrationController.class.getName());
 	
+	@Autowired
+	private HttpServletRequest context;
+	
 	@Autowired  
 	SessionFactory sessionFactory;
 	
@@ -43,7 +48,7 @@ public class RegistrationController {
 		
 		//Role roleDB = (Role) session.createQuery("from Role as role where name= '"+role+"'").uniqueResult();
 		Role roleDB = (Role) session.createQuery("from Role as role where name like '%"+role+"'").uniqueResult();
-		log.info("roleDB==> " + roleDB);
+		log.debug("roleDB==> " + roleDB);
 		int accFromDB; 
 		try {
 			session.beginTransaction();
@@ -63,7 +68,7 @@ public class RegistrationController {
 			return modelAndView;
 		}
 		UUID uuid = UUID.randomUUID();
-		System.out.println("uuid==> " + uuid);
+		log.info("uuid==> " + uuid);
 		//insert uuid into table
 		AccauntRegistration accauntRegistration = new AccauntRegistration();
 		accauntRegistration.setIdAccount(accFromDB);
@@ -71,7 +76,19 @@ public class RegistrationController {
 		System.out.println("accauntRegistration==> "+accauntRegistration);
 		session.save(accauntRegistration);
 		session.getTransaction().commit();
-		SendMessage.send(accaunt, uuid, "Registration");
+		System.out.println("context "+context.getRequestURI());//
+		String host = "";
+		String url="";
+		String port;
+		host = context.getServerName()+":";
+		log.info("host==> " + host);
+		port = context.getServerPort()+"";
+		log.info("port==> " + port);
+		url = context.getContextPath()+"/";
+		log.info("url==> " + url);
+		String fullURL = "http://" + host + port + url + "confirm/";
+		log.info("fullURL==> " + fullURL);
+		SendMessage.send(accaunt, uuid, "Registration", fullURL);
 		modelAndView.addObject("userAdded","Пользователь добавлен");
 		modelAndView.setViewName("login");
 		session.close();
@@ -80,13 +97,17 @@ public class RegistrationController {
 	}
 	
 	@RequestMapping(value = "/confirm/{uuid}")
-	public ModelAndView  confirm(@PathVariable("uuid") int uuid) {
+	public ModelAndView  confirm(@PathVariable("uuid") String uuid) {
 		System.out.println("uuid "+uuid);
 		Session session = sessionFactory.openSession(); 
-		AccauntRegistration accauntRegistration = (AccauntRegistration) session.createQuery("from AccauntRegistration as accaunt_registration where hash = " + uuid).uniqueResult();
+		session.beginTransaction();
+		AccauntRegistration accauntRegistration = (AccauntRegistration) session.createQuery("from AccauntRegistration as accaunt_registration where hash = '"+uuid+"'").uniqueResult();
+		System.out.println("accauntRegistration "+accauntRegistration);
 		int idAccount = accauntRegistration.getIdAccount();
 		Account account = (Account) session.createQuery("from Account as account where id = " + idAccount).uniqueResult();
-		account.setIsActive(1);
+		System.out.println("account"+account);
+		account.setIsActive(true);
+		System.out.println("account"+account);
 		session.getTransaction().commit(); 
     	session.close();
 		

@@ -24,7 +24,7 @@ public class Account implements Serializable {
 	
 	private String fio;
 	
-	private int isActive;
+	private boolean isActive;
 
 	public int getId() {
 		return id;
@@ -66,11 +66,11 @@ public class Account implements Serializable {
 		this.fio = fio;
 	}
 	
-	public int getIsActive() {
+	public boolean getIsActive() {
 		return isActive;
 	}
 
-	public void setIsActive(int isActive) {
+	public void setIsActive(boolean isActive) {
 		this.isActive = isActive;
 	}
 
@@ -79,7 +79,7 @@ public class Account implements Serializable {
 	}
 
 	public Account(int id, String login, String password, String email,
-			String fio, int isActive) {
+			String fio, boolean isActive) {
 		super();
 		this.id = id;
 		this.login = login;

@@ -38,12 +38,9 @@ public class LoginController {
 	@Autowired  
 	SessionFactory sessionFactory;
 	
-	@Autowired
-	private HttpServletRequest context;
-	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
     public String indexPage(ModelMap model) {
-		log.debug("index");
+		log.info("index");
         System.out.println("role--> "+SecurityContextHolder.getContext().getAuthentication().getAuthorities());
         Collection collectionRole = SecurityContextHolder.getContext().getAuthentication().getAuthorities();
         Iterator itr = collectionRole.iterator();
@@ -66,18 +63,18 @@ public class LoginController {
             if(element.toString().equals("ROLE_TUTOR")) 
             	returnPage = "tutor";
         }
-        System.out.println("returnPage "+returnPage);
+        log.info("returnPage " + returnPage);
         return "redirect:"+returnPage;
     }
     
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @RequestMapping(value = "/admin", method = RequestMethod.GET)
     public ModelAndView adminPage() {
-        log.debug("admin Page...");
+        log.info("admin Page...");
         //String name = principal.getName(); 
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String login = auth.getName();
-        log.debug("login--> "+login);
+        log.info("login--> " + login);
         ModelMap model = new ModelMap();
         model.addAttribute("name", login);
         
@@ -91,7 +88,7 @@ public class LoginController {
         
         Session session = sessionFactory.openSession();
 		List<Account> listAccount = session.createQuery("from Account as account").list();
-		System.out.println("accaunt==> "+listAccount);
+		log.info("accaunt==> " + listAccount);
 		ModelAndView modelAndView = new ModelAndView();		
 		modelAndView.addObject("listAccaunt", listAccount);
 		modelAndView.setViewName("admin/adminPage");
@@ -103,7 +100,7 @@ public class LoginController {
     @PreAuthorize("hasRole('ROLE_STUDENT')")
     @RequestMapping(value = "/student", method = RequestMethod.GET)
     public ModelAndView studentPage(ModelMap model) {
-        log.debug("student Page...");
+        log.info("student Page...");
         
         Collection collectionRole = SecurityContextHolder.getContext().getAuthentication().getAuthorities();
         Iterator itr = collectionRole.iterator();
@@ -117,7 +114,7 @@ public class LoginController {
         
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String login = auth.getName();
-        log.debug("login--> "+login);
+        log.info("login--> "+login);
         model.addAttribute("name", login);
 		ModelAndView modelAndView = new ModelAndView();		
 		
@@ -126,9 +123,6 @@ public class LoginController {
 		
 		modelAndView.addObject("listTest", listTest);
 		
-		System.out.println("context "+context.getRequestURI());
-		model.addAttribute("url", context.getRequestURI());
-		
 		modelAndView.setViewName("student/studentPage");
         return modelAndView;
     }
@@ -136,7 +130,7 @@ public class LoginController {
     @PreAuthorize("hasRole('ROLE_TUTOR')")
     @RequestMapping(value = "/tutor", method = RequestMethod.GET)
     public ModelAndView newTest(ModelMap model) {
-        log.debug("new test");
+        log.info("new test");
         
         Collection collectionRole = SecurityContextHolder.getContext().getAuthentication().getAuthorities();
         Iterator itr = collectionRole.iterator();
@@ -148,7 +142,7 @@ public class LoginController {
         
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String login = auth.getName();
-        log.debug("login--> "+login);
+        log.info("login--> "+login);
         model.addAttribute("name", login);
 		ModelAndView modelAndView = new ModelAndView();		
 		modelAndView.setViewName("tutor/newTest");
@@ -160,7 +154,7 @@ public class LoginController {
 	public ModelAndView login(
 		@RequestParam(value = "login_error", required = false) String error,
 		@RequestParam(value = "logout", required = false) String logout) {
-    	log.debug("login");
+    	log.info("login");
 		ModelAndView model = new ModelAndView();
 		if (error != null) {
 			model.addObject("error", "Invalid username or password!");
@@ -178,10 +172,12 @@ public class LoginController {
     
     @RequestMapping(value="/logout", method = RequestMethod.GET)
     public String logoutPage (HttpServletRequest request, HttpServletResponse response) {
+    	log.info("start logout");
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if (auth != null){    
             new SecurityContextLogoutHandler().logout(request, response, auth);
         }
+        log.info("finish logout");
         return "login";
     }
     

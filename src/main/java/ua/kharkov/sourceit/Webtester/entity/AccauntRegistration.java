@@ -10,16 +10,18 @@ import javax.persistence.Table;
 @Entity
 @Table(name="accaunt_registration")
 public class AccauntRegistration implements Serializable {
-	@Column(name="id")
-	@Id
-	private int idAccount;
-	private String hash;
 	
-	public int getIdAccount() {
-		return idAccount;
+	@Id
+	private int id;
+	private String hash;
+	@Column(name="id_account")
+	private int idAccount;
+	
+	public int getId() {
+		return id;
 	}
-	public void setIdAccount(int idAccount) {
-		this.idAccount = idAccount;
+	public void setId(int id) {
+		this.id = id;
 	}
 	public String getHash() {
 		return hash;
@@ -28,20 +30,31 @@ public class AccauntRegistration implements Serializable {
 		this.hash = hash;
 	}
 	
+	public int getIdAccount() {
+		return idAccount;
+	}
+	public void setIdAccount(int idAccount) {
+		this.idAccount = idAccount;
+	}
+	
 	public AccauntRegistration() {
 		super();
 	}
 	
-	public AccauntRegistration(int idAccount, String hash) {
+	public AccauntRegistration(int id, String hash, int idAccount) {
 		super();
-		this.idAccount = idAccount;
+		this.id = id;
 		this.hash = hash;
+		this.idAccount = idAccount;
 	}
 	
 	@Override
 	public String toString() {
-		return "AccauntRegistration [idAccount=" + idAccount + ", hash=" + hash
-				+ "]";
+		return "AccauntRegistration [id=" + id + ", hash=" + hash
+				+ ", idAccount=" + idAccount + "]";
 	}
+	
+	
+
 	
 }

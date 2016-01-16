@@ -10,7 +10,6 @@
 <body>
 <%@ include file="../../jspf/top.jspf" %>
 Hello student
-${url}
 
 	<c:forEach items="${listTest}" var="test">
        <a href="<c:url value='/passTheTest/${test.id}' />" > <c:out value="${test.name}"/> </a> 

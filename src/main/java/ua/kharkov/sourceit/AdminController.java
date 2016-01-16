@@ -80,14 +80,12 @@ public class AdminController {
 		Session session = sessionFactory.openSession(); 
 		session.beginTransaction();
 		Account account = (Account)session.get(Account.class, idAccaunt);
-		int isActive = account.getIsActive();
-		if(isActive == 1) {
-			account.setIsActive(0);
-			System.out.println("1");
+		boolean isActive = account.getIsActive();
+		if(isActive == true) {
+			account.setIsActive(false);
 		}
-		if(isActive == 0) {
-			account.setIsActive(1);
-			System.out.println("0");
+		if(isActive == false) {
+			account.setIsActive(true);
 		}
 		session.getTransaction().commit(); 
     	session.close();
