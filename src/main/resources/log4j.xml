@@ -15,7 +15,7 @@
 	   <param name="maxFileSize" value="10KB" />
 	   <param name="maxBackupIndex" value="5" />
 	   <!-- For Tomcat -->
-	   <param name="file" value="${catalina.home}/logs/myStruts1App.log" />
+	   <param name="file" value="${catalina.home}/logs/webtester.log" />
 	   <layout class="org.apache.log4j.PatternLayout">
 		<param name="ConversionPattern" 
 			value="%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %m%n" />

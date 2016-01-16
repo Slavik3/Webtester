@@ -23,13 +23,6 @@
 	<form:label path="email">email:</form:label>
 	<form:input path="email" class="form-control form-control-inline" size="10"/>
 	<br>
-	<form:label path="">Role:</form:label>
-	<select name="role" class="form-control">
-  		<option>admin</option>
-  		<option>advanced tutor</option>
-  		<option>tutor</option>
-  		<option>student</option> 
-	</select>
 	<br>
 	<input type="submit" value="Registration" class="btn btn-primary btn-mini">
 </form:form>

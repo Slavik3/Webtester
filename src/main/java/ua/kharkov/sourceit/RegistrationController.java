@@ -34,10 +34,10 @@ public class RegistrationController {
 	SessionFactory sessionFactory;
 	
 	@RequestMapping(value = "/registration", method = RequestMethod.POST)
-	public ModelAndView  registration(@ModelAttribute Account accaunt, @RequestParam("role") String role) {
+	public ModelAndView  registration(@ModelAttribute Account accaunt) {
 		log.info("start registration");
 		log.info("accaunt==> " + accaunt);
-		log.info("role==> " + role);
+		final int ROLE_STUDENT = 4;
 		String password = accaunt.getPassword();
 		String hashedPassword = BcryptHashing.BcryptHash(password);
 		accaunt.setPassword(hashedPassword);
@@ -46,9 +46,6 @@ public class RegistrationController {
 		
 		Session session = sessionFactory.openSession(); 
 		
-		//Role roleDB = (Role) session.createQuery("from Role as role where name= '"+role+"'").uniqueResult();
-		Role roleDB = (Role) session.createQuery("from Role as role where name like '%"+role+"'").uniqueResult();
-		log.debug("roleDB==> " + roleDB);
 		int accFromDB; 
 		try {
 			session.beginTransaction();
@@ -57,7 +54,7 @@ public class RegistrationController {
 			AccauntRole accauntRole = new AccauntRole();
 			accFromDB = accauntFromDB.getId();
 			accauntRole.setIdAccount(accFromDB);
-			accauntRole.setIdRole(roleDB.getId());
+			accauntRole.setIdRole(ROLE_STUDENT);
 			session.save(accauntRole);
 		}
 		catch (HibernateException e) {

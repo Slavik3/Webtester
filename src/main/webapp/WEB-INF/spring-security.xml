@@ -21,8 +21,8 @@
     <beans:bean id="dataSource"
         class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <beans:property name="driverClassName" value="com.mysql.jdbc.Driver" />
-        <beans:property name="url" value="jdbc:mysql://localhost/test_source_it" /> <!-- db4free.net/webtester -->
-        <beans:property name="username" value="root" /> <!-- webtester -->
+        <beans:property name="url" value="jdbc:mysql://localhost/test_source_it" /> <!--jdbc:mysql://db4free.net/webtester  -->
+        <beans:property name="username" value="root" /> <!--webtester  -->
         <beans:property name="password" value="" /> <!-- 123456 -->
     </beans:bean>
     
