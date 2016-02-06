@@ -63,10 +63,6 @@ public class StudentController {
 		List<Qwastion> listQwastion = session.createQuery("from Qwastion as qwastion where id_test="+"'"+idTest+"'").list();
 		
 		Qwastion qwastionObj = listQwastion.get(countQuestion);
-		System.out.println("qwastion "+qwastionObj);
-		
-		System.out.println("listQwastion.size()"+listQwastion.size());
-		System.out.println("listQwastion "+listQwastion);
 		
 		id=idTest;
 		countQuestion++;
@@ -89,15 +85,12 @@ public class StudentController {
 	    session.close();
 	    ModelMap model = new ModelMap();
 		model.addAttribute("name", accaunt.getLogin());
-		System.out.println("userId " + accaunt.getId());
 		
 		idAccaunt=accaunt.getId();
 		
-		//modelAndView.setViewName("student/qwastion");
 		modelAndView.setViewName("student/qwastion");
 		
 		modelAndView.addObject("countQuestion", countQuestion);
-		
 		
 		log.info("end passTheTest");
 		return modelAndView;
@@ -135,7 +128,7 @@ public class StudentController {
 		TestRezult testRezult = new TestRezult();
 		testRezult.setIdAccount(idAccaunt);
 		testRezult.setIdTest(id);
-		testRezult.setCorrectCount(correctCount);//TODO подсчет correctCount
+		testRezult.setCorrectCount(correctCount);//TODO count correctCount
 		System.out.println("testRezult "+testRezult);
 		session.save(testRezult);		
 		//session.getTransaction().commit();

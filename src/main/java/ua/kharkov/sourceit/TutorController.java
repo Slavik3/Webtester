@@ -1,8 +1,6 @@
 package ua.kharkov.sourceit;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.hibernate.Session;
@@ -86,11 +84,7 @@ public class TutorController {
 		if(correctAnswer.equals("1"))
 			answerO1.setCorrect(true);
 		session.save(answerO1);
-		//session.getTransaction().commit();
-		//session.close();
 		
-		//Session session2 = sessionFactory.openSession();
-		//session.beginTransaction();
 		Answer answerO2 = new Answer();
 		answerO2.setCreated(date);
 		answerO2.setName(answer2);
@@ -98,11 +92,7 @@ public class TutorController {
 		if(correctAnswer.equals("2"))
 			answerO2.setCorrect(true);
 		session.save(answerO2);
-		//session.getTransaction().commit();
-		//session.close();
-		
-		//Session session3 = sessionFactory.openSession();
-		//session3.beginTransaction();
+				
 		Answer answerO3 = new Answer();
 		answerO3.setCreated(date);
 		answerO3.setName(answer3);
@@ -110,11 +100,7 @@ public class TutorController {
 		if(correctAnswer.equals("3"))
 			answerO3.setCorrect(true);
 		session.save(answerO3);
-		//session3.getTransaction().commit();
-		//session3.close();
 		
-		//Session session4 = sessionFactory.openSession();
-		//session4.beginTransaction();
 		Answer answerO4 = new Answer();
 		answerO4.setCreated(date);
 		answerO4.setName(answer4);

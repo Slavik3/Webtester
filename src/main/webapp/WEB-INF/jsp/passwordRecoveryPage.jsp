@@ -9,7 +9,7 @@
 	<link rel="stylesheet" type="text/css" media="screen" href="style/style.css"/> 
 </head>
 <body>
-<form:form method="GET" commandName="user" action="passwordRecovery" class="form-signin">
+<form:form method="GET" commandName="user" action="passwordRecoveryMsg" class="form-signin">
 	<form:label path="login">login:</form:label>
 	<form:input path="login" id="login" class="form-control form-control-inline" size="10"/>
 	<br>

@@ -14,13 +14,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import ua.kharkov.sourceit.Webtester.entity.AccauntRegistration;
 import ua.kharkov.sourceit.Webtester.entity.Account;
 import ua.kharkov.sourceit.Webtester.entity.AccauntRole;
-import ua.kharkov.sourceit.Webtester.entity.Role;
 
 @Controller
 public class RegistrationController {
@@ -73,7 +71,7 @@ public class RegistrationController {
 		System.out.println("accauntRegistration==> "+accauntRegistration);
 		session.save(accauntRegistration);
 		session.getTransaction().commit();
-		System.out.println("context "+context.getRequestURI());//
+		
 		String host = "";
 		String url="";
 		String port;
@@ -85,7 +83,8 @@ public class RegistrationController {
 		log.info("url==> " + url);
 		String fullURL = "http://" + host + port + url + "confirm/";
 		log.info("fullURL==> " + fullURL);
-		SendMessage.send(accaunt, uuid, "Registration", fullURL);
+		String message = "For the confirmation of this account, please, follow this link";
+		SendMessage.send(accaunt, uuid, "Registration", fullURL, message);
 		modelAndView.addObject("userAdded","Пользователь добавлен");
 		modelAndView.setViewName("login");
 		session.close();

@@ -45,10 +45,7 @@ public class LoginController {
         Collection collectionRole = SecurityContextHolder.getContext().getAuthentication().getAuthorities();
         Iterator itr = collectionRole.iterator();
         
-       // if(collectionRole.size()>1)
-        	//send to max role?
         String returnPage = null;
-        ModelAndView modelAndView= new ModelAndView();
         while(itr.hasNext()) {
         	Object element = itr.next();
             System.out.print("element "+element + " ");
@@ -71,7 +68,6 @@ public class LoginController {
     @RequestMapping(value = "/admin", method = RequestMethod.GET)
     public ModelAndView adminPage() {
         log.info("admin Page...");
-        //String name = principal.getName(); 
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String login = auth.getName();
         log.info("login--> " + login);
@@ -92,8 +88,6 @@ public class LoginController {
 		ModelAndView modelAndView = new ModelAndView();		
 		modelAndView.addObject("listAccaunt", listAccount);
 		modelAndView.setViewName("admin/adminPage");
-		
-		
         return modelAndView;
     }
     
@@ -101,7 +95,6 @@ public class LoginController {
     @RequestMapping(value = "/student", method = RequestMethod.GET)
     public ModelAndView studentPage(ModelMap model) {
         log.info("student Page...");
-        
         Collection collectionRole = SecurityContextHolder.getContext().getAuthentication().getAuthorities();
         Iterator itr = collectionRole.iterator();
         Object role = null;
@@ -163,8 +156,6 @@ public class LoginController {
 		if (logout != null) { //TODO print in jsp
 			model.addObject("msg", "You've been logged out successfully.");
 		}
-		//if role = admin
-		//model.setViewName("adminPage");
 		
 		model.setViewName("login");
 		return model;

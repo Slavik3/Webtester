@@ -19,7 +19,7 @@ public class SendMessage {
 	
 	static Logger log = Logger.getLogger(SendMessage.class.getName());
 	
-	public static String send(Account accaunt, UUID uuid, String subject, String fullURL){
+	public static String send(Account accaunt, UUID uuid, String subject, String fullURL, String message){
 		log.debug("start send");
 		ModelAndView modelAndView = new ModelAndView();	
 		
@@ -30,7 +30,7 @@ public class SendMessage {
 		String nameRec = accaunt.getLogin();
 		System.out.println("emailTo "+emailTo);
 		final String username = "slavikkozlov3@gmail.com";
-		final String password = "";
+		final String password = "682440qwerty";
 
 		Properties props = new Properties();
 		props.put("mail.smtp.auth", "true");
@@ -46,15 +46,15 @@ public class SendMessage {
 		  });
 
 		try {
-			Message message = new MimeMessage(mailSession);
-			message.setFrom(new InternetAddress("slavikkozlov3@gmail.com"));
-			message.setRecipients(Message.RecipientType.TO,
+			Message mMessage = new MimeMessage(mailSession);
+			mMessage.setFrom(new InternetAddress("slavikkozlov3@gmail.com"));
+			mMessage.setRecipients(Message.RecipientType.TO,
 				InternetAddress.parse(emailTo));
-			message.setSubject(subject);
+			mMessage.setSubject(subject);
 			String link = "\n" + fullURL + uuid;
-			message.setText("Dear "+nameRec+", "
-				+ "\n"+ "For the confirmation of this account, please, follow this link" + link);
-			Transport.send(message);
+			mMessage.setText("Dear "+nameRec+", "
+				+ "\n"+ message + link);
+			Transport.send(mMessage);
 			System.out.println("Done");
 		} catch (MessagingException e) {
 			throw new RuntimeException(e);

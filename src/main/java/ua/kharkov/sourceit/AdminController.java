@@ -31,8 +31,7 @@ public class AdminController {
 		modelAndView.setViewName("admin/editUser");
 		Session session = sessionFactory.openSession(); 
 		Account accountForEdit = (Account) session.createQuery("from Account as account where id = " + idAccaunt).uniqueResult();
-		 modelAndView.addObject("user", accountForEdit);
-		System.out.println("ok");
+		modelAndView.addObject("user", accountForEdit);
 		log.debug("end editUserPage");
 		return modelAndView;
 	}
