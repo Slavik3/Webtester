@@ -13,7 +13,7 @@
 		<mapping class="ua.kharkov.sourceit.Webtester.entity.AccauntRole"/>
 		<mapping class="ua.kharkov.sourceit.Webtester.entity.AccauntRegistration"/>
 		<mapping class="ua.kharkov.sourceit.Webtester.entity.Test"/>
-		<mapping class="ua.kharkov.sourceit.Webtester.entity.Qwastion"/>
+		<mapping class="ua.kharkov.sourceit.Webtester.entity.Question"/>
 		<mapping class="ua.kharkov.sourceit.Webtester.entity.Answer"/>
 		<mapping class="ua.kharkov.sourceit.Webtester.entity.TestRezult"/>
 		

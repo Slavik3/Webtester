@@ -26,7 +26,7 @@ public class AdminController {
 	
 	@RequestMapping(value = "/editUserPage/{idAccount}")
 	public ModelAndView  editUserPage(@PathVariable("idAccount") int idAccount) {
-		log.debug("idAccaunt " + idAccount);
+		log.debug("idAccount " + idAccount);
 		ModelAndView modelAndView = new ModelAndView();	
 		modelAndView.setViewName("admin/editUser");
 		Session session = sessionFactory.openSession(); 

@@ -10,7 +10,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="qwastion")
-public class Qwastion implements Serializable {
+public class Question implements Serializable {
 	
 	@Id
 	private int id;
@@ -57,11 +57,11 @@ public class Qwastion implements Serializable {
 		this.active = active;
 	}
 	
-	public Qwastion() {
+	public Question() {
 		super();
 	}
 	
-	public Qwastion(int id, int idTest, String name, Date created,
+	public Question(int id, int idTest, String name, Date created,
 			Date updated, boolean active) {
 		super();
 		this.id = id;

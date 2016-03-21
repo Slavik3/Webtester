@@ -65,11 +65,11 @@ public class RegistrationController {
 		UUID uuid = UUID.randomUUID();
 		log.info("uuid==> " + uuid);
 		//insert uuid into table
-		AccauntRegistration accauntRegistration = new AccauntRegistration();
-		accauntRegistration.setIdAccount(accFromDB);
-		accauntRegistration.setHash(uuid.toString());
-		System.out.println("accauntRegistration==> "+accauntRegistration);
-		session.save(accauntRegistration);
+		AccauntRegistration accountRegistration = new AccauntRegistration();
+		accountRegistration.setIdAccount(accFromDB);
+		accountRegistration.setHash(uuid.toString());
+		System.out.println("accountRegistration==> "+accountRegistration);
+		session.save(accountRegistration);
 		session.getTransaction().commit();
 		
 		String host = "";
