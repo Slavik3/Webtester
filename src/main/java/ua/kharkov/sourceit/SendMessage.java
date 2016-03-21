@@ -30,7 +30,7 @@ public class SendMessage {
 		String nameRec = accaunt.getLogin();
 		System.out.println("emailTo "+emailTo);
 		final String username = "slavikkozlov3@gmail.com";
-		final String password = "682440qwerty";
+		final String password = "";
 
 		Properties props = new Properties();
 		props.put("mail.smtp.auth", "true");

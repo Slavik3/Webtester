@@ -2,10 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
-<%@page import="ua.kharkov.sourceit.social.facebook.FBConnection"%>
-<%
-	FBConnection fbConnection = new FBConnection();
-%>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -61,7 +58,7 @@
 
  <!-- <a href="${context }/fbLogin"> <img alt="fbLogin" src="images/login-facebook.png" /></a> -->
  
- <div align="center"><a href="<%=fbConnection.getFBAuthUrl()%>"> <img src="images/login-facebook.png" /> </a></div>
+ <div align="center"><a href=""> <img src="images/login-facebook.png" /> </a></div>
 
 <c:if test="${not empty error}">
 		<span class="error">${error}</span>

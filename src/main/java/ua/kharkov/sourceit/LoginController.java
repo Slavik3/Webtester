@@ -84,9 +84,9 @@ public class LoginController {
         
         Session session = sessionFactory.openSession();
 		List<Account> listAccount = session.createQuery("from Account as account").list();
-		log.info("accaunt==> " + listAccount);
+		log.info("account==> " + listAccount);
 		ModelAndView modelAndView = new ModelAndView();		
-		modelAndView.addObject("listAccaunt", listAccount);
+		modelAndView.addObject("listAccount", listAccount);
 		modelAndView.setViewName("admin/adminPage");
         return modelAndView;
     }

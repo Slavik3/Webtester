@@ -32,23 +32,23 @@ public class RegistrationController {
 	SessionFactory sessionFactory;
 	
 	@RequestMapping(value = "/registration", method = RequestMethod.POST)
-	public ModelAndView  registration(@ModelAttribute Account accaunt) {
+	public ModelAndView  registration(@ModelAttribute Account account) {
 		log.info("start registration");
-		log.info("accaunt==> " + accaunt);
+		log.info("account==> " + account);
 		final int ROLE_STUDENT = 4;
-		String password = accaunt.getPassword();
+		String password = account.getPassword();
 		String hashedPassword = BcryptHashing.BcryptHash(password);
-		accaunt.setPassword(hashedPassword);
+		account.setPassword(hashedPassword);
 		ModelAndView modelAndView = new ModelAndView();		
-		modelAndView.addObject("user", accaunt);
+		modelAndView.addObject("user", account);
 		
 		Session session = sessionFactory.openSession(); 
 		
 		int accFromDB; 
 		try {
 			session.beginTransaction();
-			session.save(accaunt);
-			Account accauntFromDB = (Account) session.createQuery("from Account as account where login= '"+accaunt.getLogin()+"'").uniqueResult();
+			session.save(account);
+			Account accauntFromDB = (Account) session.createQuery("from Account as account where login= '"+account.getLogin()+"'").uniqueResult();
 			AccauntRole accauntRole = new AccauntRole();
 			accFromDB = accauntFromDB.getId();
 			accauntRole.setIdAccount(accFromDB);
@@ -84,7 +84,7 @@ public class RegistrationController {
 		String fullURL = "http://" + host + port + url + "confirm/";
 		log.info("fullURL==> " + fullURL);
 		String message = "For the confirmation of this account, please, follow this link";
-		SendMessage.send(accaunt, uuid, "Registration", fullURL, message);
+		SendMessage.send(account, uuid, "Registration", fullURL, message);
 		modelAndView.addObject("userAdded","Пользователь добавлен");
 		modelAndView.setViewName("login");
 		session.close();
@@ -97,9 +97,9 @@ public class RegistrationController {
 		System.out.println("uuid "+uuid);
 		Session session = sessionFactory.openSession(); 
 		session.beginTransaction();
-		AccauntRegistration accauntRegistration = (AccauntRegistration) session.createQuery("from AccauntRegistration as accaunt_registration where hash = '"+uuid+"'").uniqueResult();
-		System.out.println("accauntRegistration "+accauntRegistration);
-		int idAccount = accauntRegistration.getIdAccount();
+		AccauntRegistration accountRegistration = (AccauntRegistration) session.createQuery("from AccauntRegistration as accaunt_registration where hash = '"+uuid+"'").uniqueResult();
+		System.out.println("accauntRegistration "+accountRegistration);
+		int idAccount = accountRegistration.getIdAccount();
 		Account account = (Account) session.createQuery("from Account as account where id = " + idAccount).uniqueResult();
 		System.out.println("account"+account);
 		account.setIsActive(true);

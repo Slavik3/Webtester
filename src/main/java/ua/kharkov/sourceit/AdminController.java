@@ -24,29 +24,29 @@ public class AdminController {
 	@Autowired  
 	SessionFactory sessionFactory;
 	
-	@RequestMapping(value = "/editUserPage/{idAccaunt}")
-	public ModelAndView  editUserPage(@PathVariable("idAccaunt") int idAccaunt) {
-		log.debug("idAccaunt " + idAccaunt);
+	@RequestMapping(value = "/editUserPage/{idAccount}")
+	public ModelAndView  editUserPage(@PathVariable("idAccount") int idAccount) {
+		log.debug("idAccaunt " + idAccount);
 		ModelAndView modelAndView = new ModelAndView();	
 		modelAndView.setViewName("admin/editUser");
 		Session session = sessionFactory.openSession(); 
-		Account accountForEdit = (Account) session.createQuery("from Account as account where id = " + idAccaunt).uniqueResult();
+		Account accountForEdit = (Account) session.createQuery("from Account as account where id = " + idAccount).uniqueResult();
 		modelAndView.addObject("user", accountForEdit);
 		log.debug("end editUserPage");
 		return modelAndView;
 	}
 	
 	@RequestMapping(value = "/editUser", method = RequestMethod.GET)
-	public ModelAndView  editUser(@RequestParam Integer idAccaunt, @RequestParam String login, @RequestParam String email) {
+	public ModelAndView  editUser(@RequestParam Integer idAccount, @RequestParam String login, @RequestParam String email) {
 		ModelAndView modelAndView = new ModelAndView();
 		log.debug("start editUser");
 		log.debug("email " + email);
     	Session session = sessionFactory.openSession();  
     	session.beginTransaction();  
     	  
-    	Account accaunt = (Account)session.get(Account.class, idAccaunt);  
-    	accaunt.setLogin(login);
-    	accaunt.setEmail(email);
+    	Account account = (Account)session.get(Account.class, idAccount);  
+    	account.setLogin(login);
+    	account.setEmail(email);
     	session.getTransaction().commit(); 
     	
     	List<Account> listAccount = session.createQuery("from Account as account").list();
@@ -58,13 +58,13 @@ public class AdminController {
 		return modelAndView;
 	}
 	
-	@RequestMapping(value = "/remove/{idAccaunt}")
-	public String  deleteUser(@PathVariable("idAccaunt") int idAccaunt) {
+	@RequestMapping(value = "/remove/{idAccount}")
+	public String  deleteUser(@PathVariable("idAccount") int idAccount) {
 		log.debug("start deleteUser");
-		log.debug("idAccaunt " + idAccaunt);
+		log.debug("idAccount " + idAccount);
 		Session session = sessionFactory.openSession(); 
 		session.beginTransaction();
-		Query query = session.createQuery("delete Account where id = "+idAccaunt);
+		Query query = session.createQuery("delete Account where id = "+idAccount);
     	query.executeUpdate();
     	session.getTransaction().commit();
     	session.close();
@@ -72,13 +72,13 @@ public class AdminController {
 		return "redirect:/admin";
 	}
 	
-	@RequestMapping(value = "/isActive/{idAccaunt}")
-	public String  isActiveUser(@PathVariable("idAccaunt") int idAccaunt) {
+	@RequestMapping(value = "/isActive/{idAccount}")
+	public String  isActiveUser(@PathVariable("idAccount") int idAccount) {
 		log.info("start active/deActive Account");
-		log.info("idAccaunt " + idAccaunt);
+		log.info("idAccount " + idAccount);
 		Session session = sessionFactory.openSession(); 
 		session.beginTransaction();
-		Account account = (Account)session.get(Account.class, idAccaunt);
+		Account account = (Account)session.get(Account.class, idAccount);
 		boolean isActive = account.getIsActive();
 		if(isActive == true) {
 			account.setIsActive(false);
