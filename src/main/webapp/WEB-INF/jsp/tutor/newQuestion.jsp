@@ -17,7 +17,7 @@
 </head>
 <body>
 <%@ include file="../../jspf/top.jspf" %>
-<form method="GET" action="addQwastion" class="form-signin">
+<form method="GET" action="addQuestion" class="form-signin">
 	
 	<label>Вопрос к тесту:</label>
 	<input name="qwastionName" class="form-control form-control-inline" size="10"/>

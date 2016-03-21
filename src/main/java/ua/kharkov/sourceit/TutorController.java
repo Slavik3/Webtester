@@ -50,34 +50,34 @@ public class TutorController {
 		log.info("idTest "+idTest);
 		session.close();
 		ModelAndView modelAndView = new ModelAndView();	
-		modelAndView.setViewName("tutor/newQwastion");
+		modelAndView.setViewName("tutor/newQuestion");
 		log.info("end addTest");
 		return modelAndView;
 	}
 	
-	@RequestMapping(value = "/addQwastion", method = RequestMethod.GET)
+	@RequestMapping(value = "/addQuestion", method = RequestMethod.GET)
 	public ModelAndView addQwastion(@RequestParam String questionName,
 			@RequestParam String answer1, @RequestParam String answer2,
 			@RequestParam String answer3, @RequestParam String answer4, @RequestParam String correctAnswer) {
-		System.out.println("qwastionName " + questionName);
+		System.out.println("questionName " + questionName);
 		System.out.println(answer1+answer2+answer3+answer4);
 		System.out.println("correctAnswer "+correctAnswer);
 		ModelAndView modelAndView = new ModelAndView();
-		Question qwastion = new Question();
-		qwastion.setName(questionName);
+		Question question = new Question();
+		question.setName(questionName);
 		Date date = new Date();
-		qwastion.setCreated(date);
+		question.setCreated(date);
 		System.out.println("idTest==> "+idTest);
-		qwastion.setIdTest(idTest);//TODO
+		question.setIdTest(idTest);//TODO
 		Session session = sessionFactory.openSession(); 
 		session.beginTransaction();
-		session.save(qwastion);
+		session.save(question);
 		session.getTransaction().commit();
 		session.beginTransaction();
 		Answer answerO1 = new Answer();
 		answerO1.setCreated(date);
 		answerO1.setName(answer1);
-		Question qwastionFor = (Question) session.createQuery("from Question as qwastion where name = '" + questionName+"'").uniqueResult();
+		Question qwastionFor = (Question) session.createQuery("from Question as question where name = '" + questionName+"'").uniqueResult();
 		int idQuestion	= qwastionFor.getId();
 		System.out.println("idQuestion " + idQuestion);
 		answerO1.setIdQwastion(idQuestion);

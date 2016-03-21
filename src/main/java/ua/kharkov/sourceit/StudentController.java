@@ -88,7 +88,7 @@ public class StudentController {
 		
 		idAccount = accaunt.getId();
 		
-		modelAndView.setViewName("student/qwastion");
+		modelAndView.setViewName("student/question");
 		
 		modelAndView.addObject("countQuestion", countQuestion);
 		
@@ -98,14 +98,14 @@ public class StudentController {
 	
 	int correctCount = 0;
 	
-	@RequestMapping(value = "/nextTestQwastion", method = RequestMethod.GET)
+	@RequestMapping(value = "/nextTestQuestion", method = RequestMethod.GET)
 	public ModelAndView nextTestQwastion(@RequestParam String correctAnswer) {
 		log.info("start nextTestQuestion");
 		log.info("correctAnswer " + correctAnswer);
 		ModelAndView modelAndView = new ModelAndView();
 		
 		Session session = sessionFactory.openSession(); 
-		List<Question> listQuestion = session.createQuery("from Question as qwastion where id_test="+"'"+id+"'").list();
+		List<Question> listQuestion = session.createQuery("from Question as question where id_test="+"'"+id+"'").list();
 		Question questionObj = listQuestion.get(countQuestion);
 		System.out.println("question "+questionObj);
 		countQuestion++;
@@ -113,7 +113,7 @@ public class StudentController {
 		
 		modelAndView.addObject("qwastion", "qqq");//qwastionObj.getName()
 		
-		List<Answer> listAnswer = session.createQuery("from Answer as answer where 	id_qwastion="+"'"+questionObj.getId()+"'").list();
+		List<Answer> listAnswer = session.createQuery("from Answer as answer where 	id_question="+"'"+questionObj.getId()+"'").list();
 		modelAndView.addObject("listAnswer", listAnswer);
 		
 		if(countQuestion<listQwastionSize) {
@@ -133,8 +133,8 @@ public class StudentController {
 		session.save(testResult);		
 		//session.getTransaction().commit();
 		
-		modelAndView.setViewName("student/qwastion");
-		log.info("end nextTestQwastion");
+		modelAndView.setViewName("student/question");
+		log.info("end nextTestQuestion");
 		return modelAndView;
 	}
 	
